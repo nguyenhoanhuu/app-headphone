@@ -23,7 +23,68 @@ const MyCart = ({navigation}) => {
     return unsubscribe;
   }, [navigation]);
 
- 
+ //nhận data từ local 
+ const getDataFromDB = async () => {
+  let items = await AsyncStorage.getItem('cartItems');
+  items = JSON.parse(items);
+  let productData = [];
+  if (items) {
+    Items.forEach(data => {
+      if (items.includes(data.id)) {
+        productData.push(data);
+        return;
+      }
+    });
+    setProduct(productData);
+    getTotal(productData);
+  } else {
+    setProduct(false);
+    getTotal(false);
+  }
+};
+
+//tính tổng giá các item ở trong giỏ hàng
+const getTotal = productData => {
+  let total = 0;
+  for (let index = 0; index < productData.length; index++) {
+    let productPrice = productData[index].productPrice;
+    total = total + productPrice;
+  }
+  setTotal(total);
+};
+
+//xóa data trong giỏ hàng
+
+const removeItemFromCart = async id => {
+  let itemArray = await AsyncStorage.getItem('cartItems');
+  itemArray = JSON.parse(itemArray);
+  if (itemArray) {
+    let array = itemArray;
+    for (let index = 0; index < array.length; index++) {
+      if (array[index] == id) {
+        array.splice(index, 1);
+      }
+
+      await AsyncStorage.setItem('cartItems', JSON.stringify(array));
+      getDataFromDB();
+    }
+  }
+};
+
+//checkout
+
+const checkOut = async () => {
+  try {
+    await AsyncStorage.removeItem('cartItems');
+  } catch (error) {
+    return error;
+  }
+
+  ToastAndroid.show('Items will be Deliverd SOON!', ToastAndroid.SHORT);
+
+  navigation.navigate('Home');
+};
+
 
   const renderProducts = (data, index) => {
     return (
