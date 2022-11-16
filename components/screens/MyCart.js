@@ -59,7 +59,6 @@ const MyCart = ({ navigation }) => {
         
        
       </ScrollView>
-    </View>
   );
 };
 
