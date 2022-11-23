@@ -149,10 +149,10 @@ const checkOut = async () => {
                   maxWidth: '85%',
                   marginRight: 4,
                 }}>
-                &#8377;{data.productPrice}
+                ${data.productPrice}
               </Text>
               <Text>
-                (~&#8377;
+                (~$
                 {data.productPrice + data.productPrice / 20})
               </Text>
             </View>
@@ -465,7 +465,7 @@ const checkOut = async () => {
                   color: COLOURS.black,
                   opacity: 0.8,
                 }}>
-                &#8377;{total}.00
+                ${total}.00
               </Text>
             </View>
             <View
@@ -492,7 +492,7 @@ const checkOut = async () => {
                   color: COLOURS.black,
                   opacity: 0.8,
                 }}>
-                &#8377;{total / 20}
+                ${total / 20}
               </Text>
             </View>
             <View
@@ -517,7 +517,7 @@ const checkOut = async () => {
                   fontWeight: '500',
                   color: COLOURS.black,
                 }}>
-                &#8377;{total + total / 20}
+                ${total + total / 20}
               </Text>
             </View>
           </View>
@@ -551,7 +551,7 @@ const checkOut = async () => {
               color: COLOURS.white,
               textTransform: 'uppercase',
             }}>
-            CHECKOUT (&#8377;{total + total / 20} )
+            CHECKOUT (${total + total / 20} )
           </Text>
         </TouchableOpacity>
       </View>
